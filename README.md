@@ -24,7 +24,7 @@ There exists a `Makefile` which compiles to two different executables - one exec
 
 `attack.sh` runs a basic memory exhaustion attack using 250, 500, 1000, 1250 fragments. It will print a message "Successful memory exhaustion attack!" if a program fails. Otherwise it will print "Memory exhaustion attack bypassed".
 
-`benchmark.sh` runs the timings of the `copy_section` function. It prints mean, standard deviation and standard error values. On line 15, one can increase the number of experiments run.
+`benchmark.sh` runs the timings of the `copy_section` function. It prints mean, standard deviation and standard error values. On line 15, one can increase the number of experiments run. The output is written within `results.txt`.
 
 
 
