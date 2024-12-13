@@ -10,21 +10,25 @@ There exists a `Makefile` which compiles to two different executables - one exec
 **attack** - Conducts a memory exhaustion attack which is possible on the original function by acting as an on-path adversary and forcing the program to allocate an excessive amount of memory.
 
 **no** - Does not conduct memory exhaustion attack.
-### Building
+# Building
 1. Run the `Makefile` via `make`
 2. Choose whether to run `./arrf_static <number-of-fragments> <attack|no attack>` or `./arrf_dynamic <number-of-fragments> <attack|no attack>`. 
 3. The output is from `handler.c` which produces the timings of the `copy_section` function in milliseconds.
 
-### Example
+# Example
 1. If you want to test the dynamic variant with 1000 fragments and do not want to conduct an attack we run `./arrf_dynamic 1000 no`.
 
 2. If you want to test the static variant with 250 fragments and want to conduct the attack we run `./arrf_static 250 attack`.
 
-### Scripts
+# Scripts
 
 `attack.sh` runs a basic memory exhaustion attack using 250, 500, 1000, 1250 fragments. It will print a message "Successful memory exhaustion attack!" if a program fails. Otherwise it will print "Memory exhaustion attack bypassed".
 
-`benchmark.sh` runs the timings of the `copy_section` function. It prints mean, standard deviation and standard error values. On line 15, one can increase the number of experiments run. The output is written within `results.txt`.
+`benchmark.sh` runs timings of the `copy_section` function and produces statistical data which is used in our paper. It prints mean, standard deviation and standard error values. On line 15, one can increase the number of experiments run. The output is written within `results.txt`.
+
+# References
+
+https://github.com/Martyrshot/ARRF-experiments/ (Code-base in which our work is based on)
 
 
 
