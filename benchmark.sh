@@ -1,8 +1,7 @@
 i=50
-output_file="time_analysis_results.txt"
+output_file="results.txt"
 
 make
-# Write header to file
 echo -e "Input Size   Dynamic Mean (ms)   Dynamic StdDev (ms)   Dynamic StdErr (ms)   Static Mean (ms)   Static StdDev (ms)   Static StdErr (ms)" > $output_file
 
 echo -e "Running performance tests..."
@@ -14,11 +13,11 @@ for i in "${values[@]}"; do
     dynamic_times=()
     static_times=()
     for _ in {1..10}; do
-        output=$(./arrf_dynamic $i)
+        output=$(./arrf_dynamic $i "no attack")
         time_taken=$(echo "$output" | grep -Eio "[0-9]+\.[0-9]+.*ms" | grep -Eo "[0-9]+\.[0-9]+")
         dynamic_times+=("$time_taken")
 
-        output=$(./arrf_static $i)
+        output=$(./arrf_static $i "no attack")
         time_taken=$(echo "$output" | grep -Eio "[0-9]+\.[0-9]+.*ms" | grep -Eo "[0-9]+\.[0-9]+")
         static_times+=("$time_taken")
     done

@@ -11,7 +11,7 @@
 #include <semaphore.h>
 #include <assert.h>
 
-#include "original.h"
+#include "static.h"
 #include "question.h"
 #include "packedrr.h"
 #include "rrfrag.h"
@@ -42,8 +42,6 @@ PartialRR *find_partialrr(PartialDNSMessage *pm, uint16_t rrid) {
   if (pm == NULL) {
     return NULL;
   }
-  //printf("rrid: %u\n", rrid);
-  //printf("Length: %d\n", length);
   for (uint16_t i = 0; i < pm->ancount; i++) {
     if (pm->answers_section[i]->rrid == rrid) {
       return pm->answers_section[i];
@@ -85,9 +83,8 @@ int init_partialrr(PartialRR **prr) {
 }
 
 void copy_section(PartialDNSMessage *pm, PackedRR **msgsection, uint16_t sec_len) {
-
       RRFrag *rrfrag = msgsection[0]->data.rrfrag;
-      // rrfrag->rrsize = INT32_MAX;
+      // Simulating an on-path attacker
       for (int i = 0; i < sec_len; i++) {
           uint16_t rrid = rrfrag[i].rrid;
           uint32_t curidx = rrfrag[i].curidx;
@@ -109,7 +106,6 @@ void copy_section(PartialDNSMessage *pm, PackedRR **msgsection, uint16_t sec_len
               prr->expected_blocks = totalblocks;
           }
           if (prr->bytes == NULL) {
-              printf("we enter!\n");
               prr->bytes = malloc(sizeof(unsigned char) * rrfrag->rrsize);
               if (prr->bytes == NULL) {
                   printf("Error allocating bytes in prr\n");

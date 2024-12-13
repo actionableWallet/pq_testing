@@ -1,5 +1,5 @@
-#ifndef SANDBOX_H
-#define SANDBOX_H
+#ifndef STATIC_H
+#define STATIC_H
 
 #include <stdint.h>
 #include <stdio.h>

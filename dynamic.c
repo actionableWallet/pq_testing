@@ -11,7 +11,7 @@
 #include <semaphore.h>
 #include <assert.h>
 
-#include "sandbox.h"
+#include "dynamic.h"
 #include "question.h"
 #include "packedrr.h"
 #include "rrfrag.h"
@@ -115,7 +115,6 @@ void copy_section(PartialDNSMessage *pm, PackedRR **msgsection, uint16_t sec_len
         }
 
         if (prr->bytes == NULL) {
-            printf("we enter!\n");
             prr->bytes = malloc(sizeof(unsigned char) * rrfrag->fragsize);
             prr->bytes_capacity = rrfrag->fragsize;
             prr->headers = malloc(sizeof(FragHeader)); // Fix this

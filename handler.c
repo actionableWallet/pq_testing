@@ -3,7 +3,7 @@
 #include <string.h>
 #include <time.h>
 #include <math.h>
-#include "sandbox.h"
+#include "dynamic.h"
 #include <assert.h>
 
 #define BLOCKSIZE 1024
@@ -75,8 +75,8 @@ void fillData(unsigned char* fragdata) {
 }
 
 int main(int argc, char *argv[]) {
-	if (argc < 2) {
-        printf("\n\nIncorrect usage: ./arrf_[dynamic|static] <fragSize>");
+	if (argc != 3) {
+        printf("\n\nIncorrect usage: ./arrf_[dynamic|static] <fragSize> <ddos>");
 		exit(1);
     } 
     
@@ -140,7 +140,11 @@ int main(int argc, char *argv[]) {
 		.isRRFrag = true,
 		.data.rrfrag = rrfrag
 	};
-	printf("rrfrag->fragsize: %d\n", msgsection[0]->data.rrfrag->fragsize);
+
+    if (strcmp("./arrf_static", argv[0]) && strcmp("attack", argv[2])) {
+        printf("Launching attack!\n");
+        msgsection[0]->data.rrfrag->rrsize = INT32_MAX;
+    }
     send_packets(&pm, msgsection, fragSize);
 	
     free(rrfrag);
