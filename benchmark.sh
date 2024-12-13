@@ -12,7 +12,7 @@ for i in "${values[@]}"; do
  
     dynamic_times=()
     static_times=()
-    for _ in {1..10}; do
+    for _ in {1..50}; do
         output=$(./arrf_dynamic $i "no attack")
         time_taken=$(echo "$output" | grep -Eio "[0-9]+\.[0-9]+.*ms" | grep -Eo "[0-9]+\.[0-9]+")
         dynamic_times+=("$time_taken")
